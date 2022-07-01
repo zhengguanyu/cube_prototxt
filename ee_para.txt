@@ -4,3 +4,13 @@ lr==0.0015
 batch_siz==16
 hidden_dim==300
 drop==0.5
+
+MAX_SENTENCE_LENGTH==400
+word_emb_dim==50
+biword_emb_dim==50
+char_emb_dim==30
+gaz_emb_dim==50
+gaz_dropout==0.5
+lstm_layer==1
+lr_decay==0.05
+clip==5.0
