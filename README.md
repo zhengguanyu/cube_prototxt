@@ -1,1 +1,5 @@
-# cube_prototxt
+## 各个模型结构说明
+ee_para.txt -- 要素抽取模型超参数
+element_extraction.md --要素抽取模型结构说明
+标题分类.txt --标题分类模型结构说明及超参数设置
+内容分类.txt --内容分类模型结构说明及超参数设置
