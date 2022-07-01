@@ -1,0 +1,49 @@
+合同内容分类模型
+
+layer {
+  name: "data"
+  type: "Input"
+  top: "data"
+  input_param { shape: { batch_size: 30  embedding_size: 768 max_word_num: 100 vocab_size: 50000 } } }
+#第一层为数据和一些超参数
+
+
+ layer {
+
+name: "embeding"
+type: "bert"
+bottom: "data"
+top: "bert"
+param {
+embeding_size:768
+}
+#第二层是768维bert词向量层
+
+
+
+
+layer {
+name: "bilstm"
+type: "Recurrent"
+bottom: "bilstm"
+top: "bilstm"
+
+}
+#这一层是bilstm层。已经转化的数据词向量传入bilstm层
+
+layer {
+name: "HAN"
+type: "Attention"
+bottom: "HAN"
+top: "Attention"
+}
+#这一层是attention层，bilstm层输出结果传入attention层
+
+
+layer {
+name: "loss"
+type: "Softmax"
+bottom: "fc"
+top: "loss"
+}
+#这一层是softmax层，输出结果
