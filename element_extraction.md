@@ -101,7 +101,8 @@ gazlstm.py -> `def forward()`前向传播中包含了crf层的维特比算法
 
 main.py -> `def load_model_decode`,`def train`,`def evaluate`
 
-## 模型结构（略）
+## 3 模型结构（略）
+模型整体结构：**(Bert-Lattice-Lexicon)+BILSTM+CRF**
 
 ```
 self.gaz_embedding = self.gaz_embedding.cuda()
