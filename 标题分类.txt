@@ -1,0 +1,97 @@
+合同标题分类模型
+
+layer {
+  name: "data"
+  type: "Input"
+  top: "data"
+  input_param { shape: { batch_size: 128  embedding_size: 768 max_word_num: 7 vocab_size: 50000 } } }
+#第一层为数据和一些超参数
+
+
+ layer {
+
+name: "embeding"
+type: "bert"
+bottom: "data"
+top: "bert"
+param {
+embeding_size:768
+}
+#第二层是768维bert词向量层
+
+
+
+
+layer {
+name: "bilstm"
+type: "Recurrent"
+bottom: "bilstm"
+top: "bilstm"
+
+}
+#这一层是bilstm层。已经转化的数据词向量传入bilstm层
+
+layer {
+name: "att"
+type: "Attention"
+bottom: "att"
+top: "Attention"
+}
+#这一层是attention层，bilstm层输出结果传入attention层
+
+
+layer {
+name: "maxpooling1"
+type: "Pooling"
+bottom: "bilstm"
+top: "maxpooling1"
+pooling_param {
+pool: MAX
+kernel_size: 1
+stride: 2
+}
+}
+#这一层是maxpooling层，bilstm层输出结果传入maxpooling进行最大池化
+ 
+
+ 
+
+layer {
+name: "maxpooling2"
+type: "Pooling"
+bottom: "att"
+top: "maxpooling2"
+pooling_param {
+pool: MAX
+kernel_size: 1
+stride: 2
+}
+}
+#这一层是maxpooling层，attention层输出结果传入maxpooling进行最大池化
+ 
+
+
+
+
+layer {
+name: "fc"
+type: "Convolution"
+bottom: "maxpooling1、maxpooling2"
+top: "fc"
+}
+layer {
+name: "relu"
+type: "ReLU"
+bottom: "fc"
+top: "fc"
+}
+#这一层是fully connected层，将maxpooling1和maxpooling2连接到一起
+
+
+layer {
+name: "loss"
+type: "Softmax"
+bottom: "fc"
+top: "loss"
+}
+#这一层是softmax层，输出结果
